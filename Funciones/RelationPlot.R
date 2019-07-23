@@ -8,11 +8,10 @@ head(mtcars)
 
 relation.plot <- function(x, y) {
     require(ggplot2)
-    require(stats)
-    qplot(x, y) +
+    qplot(x, y, xlab = deparse(substitute(x)), ylab = deparse(substitute(y))) +
         stat_smooth(method="lm", se = FALSE) +
         annotate("text",
-                 x = quantile(x, .75),
+                 x = median(x),
                  y = max(y),
                  label = paste("R.Squared = ",
                                round(summary(lm(y~x))$adj.r.squared, 2)))
